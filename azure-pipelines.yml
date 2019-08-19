@@ -15,5 +15,5 @@ steps:
 
 - script: |
     pip install -r requirements.txt
-    """func azure functionapp publish azFuncPyApp --build remote"""
-  displayName: 'Run a multi-line script'
+    echo func
+displayName: 'Run a multi-line script'
