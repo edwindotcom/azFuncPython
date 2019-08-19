@@ -9,13 +9,24 @@ trigger:
 pool:
   vmImage: 'ubuntu-latest'
 
+strategy:
+  matrix:
+    Python35:
+      PYTHON_VERSION: '3.5'
+    Python36:
+      PYTHON_VERSION: '3.6'
+    Python37:
+      PYTHON_VERSION: '3.7'
+  maxParallel: 3
+
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '$(PYTHON_VERSION)'
+    architecture: 'x64'
 
 - script: |
-    sudo apt-get install azure-functions-core-tools
     python -m pip install --upgrade pip setuptools wheel
     pip install -r requirements.txt
     func
-displayName: 'Run a multi-line script'
+
